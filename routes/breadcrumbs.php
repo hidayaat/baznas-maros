@@ -34,6 +34,18 @@ Breadcrumbs::for('add_category', function ($trail) {
     $trail->push('Tambah Kategori', route('categories.create'));
 });
 
+//Dashboard > Categories > Edit Category
+Breadcrumbs::for('edit_category', function ($trail, $category) {
+    $trail->parent('categories');
+    $trail->push('Edit', route('categories.edit', ['category' => $category]));
+});
+
+//Dashboard > Categories > Edit Category > Title
+Breadcrumbs::for('edit_category_title', function ($trail, $category) {
+    $trail->parent('edit_category', $category);
+    $trail->push($category->title, route('categories.edit',['category' => $category]));
+});
+
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 //     $trail->parent('home');
