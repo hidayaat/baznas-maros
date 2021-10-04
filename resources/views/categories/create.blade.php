@@ -13,22 +13,33 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('categories.store') }}" method="POST">
+                        @csrf
                         <!-- title -->
                         <div class="form-group">
                             <label for="input_category_title" class="font-weight-bold">
                                 Judul
                             </label>
-                            <input id="input_category_title" value="" name="title" type="text" class="form-control"
-                                placeholder="Masukkan Judul" />
+                            <input id="input_category_title" value="" name="title" type="text"
+                                class="form-control @error('title') is-invalid @enderror" placeholder="Masukkan Judul" />
+                            @error('title')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <!-- slug -->
                         <div class="form-group">
                             <label for="input_category_slug" class="font-weight-bold">
                                 Slug
                             </label>
-                            <input id="input_category_slug" value="" name="slug" type="text" class="form-control"
+                            <input id="input_category_slug" value="" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
                                 readonly />
+                            @error('slug')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <!-- thumbnail -->
                         <div class="form-group">
@@ -37,13 +48,18 @@
                             </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button id="button_category_thumbnail" data-input="input_category_thumbnail" data-preview="holder"
-                                        class="btn btn-primary" type="button">
+                                    <button id="button_category_thumbnail" data-input="input_category_thumbnail"
+                                        data-preview="holder" class="btn btn-primary" type="button">
                                         Telusuri
                                     </button>
                                 </div>
                                 <input id="input_category_thumbnail" name="thumbnail" value="" type="text"
-                                    class="form-control" placeholder="Masukkan file" readonly />
+                                    class="form-control @error('thumbnail') is-invalid @enderror" placeholder="Masukkan file" readonly />
+                                @error('thumbnail')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         {{-- preview thumbnail --}}
@@ -61,8 +77,13 @@
                             <label for="input_category_description" class="font-weight-bold">
                                 Deskripsi
                             </label>
-                            <textarea id="input_category_description" name="description" class="form-control" rows="3"
+                            <textarea id="input_category_description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3"
                                 placeholder="Masukkan deskripsi disini..."></textarea>
+                            @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary px-4" href="{{ route('categories.index') }}">Kembali</a>
@@ -123,16 +144,16 @@
 
             // event:input title
             $('#input_category_title').change(function() {
-               let title = $(this).val();
-               let parent_category = $('#select_category_parent').val() ?? "";
-               $('#input_category_slug').val(generateSlug(parent_category + " " + title));
+                let title = $(this).val();
+                let parent_category = $('#select_category_parent').val() ?? "";
+                $('#input_category_slug').val(generateSlug(parent_category + " " + title));
             });
 
             // event:select paarent category
             $('#select_category_parent').change(function() {
-               let title = $('#input_category_title').val();
-               let parent_category = $(this).val() ?? "";
-               $('#input_category_slug').val(generateSlug(parent_category + " " + title));
+                let title = $('#input_category_title').val();
+                let parent_category = $(this).val() ?? "";
+                $('#input_category_slug').val(generateSlug(parent_category + " " + title));
             });
 
             //event:thumbnail
