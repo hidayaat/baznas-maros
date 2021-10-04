@@ -2,7 +2,7 @@
 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
        <div class="nav">
-          <a class="nav-link active" href="#">
+          <a class="nav-link {{ set_active('dashboard.index') }}" href="{{ route('dashboard.index')}}">
              <div class="sb-nav-link-icon">
                 <i class="fas fa-tachometer-alt"></i>
              </div>
@@ -16,7 +16,8 @@
              </div>
              Posts
           </a>
-          <a class="nav-link" href="#">
+          {{-- Menu Categories --}}
+          <a class="nav-link {{ set_active('categories.index') }}" href="{{ route('categories.index')}}">
              <div class="sb-nav-link-icon">
                 <i class="fas fa-bookmark"></i>
              </div>
