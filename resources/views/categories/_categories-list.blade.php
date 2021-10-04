@@ -16,7 +16,9 @@
                 <i class="fas fa-edit"></i>
             </a>
             <!-- delete -->
-            <form class="d-inline" action="" method="POST">
+            <form class="d-inline" action="{{ route('categories.destroy',['category'=>$category]) }}" role="alert" method="POST" alert-text="Yakin ingin menghapus kategori {{ old('title', $category->title) }} ?">
+                @csrf
+                @method('DELETE')
                 <button type="submit" class="btn btn-sm btn-danger">
                     <i class="fas fa-trash"></i>
                 </button>

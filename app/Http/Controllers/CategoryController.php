@@ -160,6 +160,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        try {
+            $category->delete();
+            Alert::success('Hapus Kategori', 'Berhasil');
+        } catch (\Throwable $th) {
+            Alert::error('Hapus Kategori', 'Gagal'.$th->getMessage());
+        }
+
+        return redirect()->back();
     }
 }
