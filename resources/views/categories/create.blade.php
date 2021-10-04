@@ -37,7 +37,7 @@
                             </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <button id="button_category_thumbnail" data-input="input_category_thumbnail"
+                                    <button id="button_category_thumbnail" data-input="input_category_thumbnail" data-preview="holder"
                                         class="btn btn-primary" type="button">
                                         Telusuri
                                     </button>
@@ -45,6 +45,9 @@
                                 <input id="input_category_thumbnail" name="thumbnail" value="" type="text"
                                     class="form-control" placeholder="Masukkan file" readonly />
                             </div>
+                        </div>
+                        {{-- preview thumbnail --}}
+                        <div id="holder">
                         </div>
                         <!-- parent_category -->
                         <div class="form-group">
@@ -81,6 +84,8 @@
 @push('javascript-external')
     <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('vendor/select2/js/i18n/id.js') }}"></script>
+    {{-- file manager --}}
+    <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
 @endpush
 
 @push('javascript-internal')
@@ -129,6 +134,9 @@
                let parent_category = $(this).val() ?? "";
                $('#input_category_slug').val(generateSlug(parent_category + " " + title));
             });
+
+            //event:thumbnail
+            $('#button_category_thumbnail').filemanager('image');
         });
     </script>
 
