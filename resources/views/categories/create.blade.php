@@ -20,7 +20,7 @@
                             <label for="input_category_title" class="font-weight-bold">
                                 Judul
                             </label>
-                            <input id="input_category_title" value="" name="title" type="text"
+                            <input id="input_category_title" value="{{ old('title') }}" name="title" type="text"
                                 class="form-control @error('title') is-invalid @enderror" placeholder="Masukkan Judul" />
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -33,8 +33,8 @@
                             <label for="input_category_slug" class="font-weight-bold">
                                 Slug
                             </label>
-                            <input id="input_category_slug" value="" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror"
-                                readonly />
+                            <input id="input_category_slug" value="{{ old('slug') }}" name="slug" type="text"
+                                class="form-control @error('slug') is-invalid @enderror" readonly />
                             @error('slug')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -53,8 +53,9 @@
                                         Telusuri
                                     </button>
                                 </div>
-                                <input id="input_category_thumbnail" name="thumbnail" value="" type="text"
-                                    class="form-control @error('thumbnail') is-invalid @enderror" placeholder="Masukkan file" readonly />
+                                <input id="input_category_thumbnail" name="thumbnail" value="{{ old('thumbnail') }}"
+                                    type="text" class="form-control @error('thumbnail') is-invalid @enderror"
+                                    placeholder="Masukkan file" readonly />
                                 @error('thumbnail')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -68,8 +69,12 @@
                         <!-- parent_category -->
                         <div class="form-group">
                             <label for="select_category_parent" class="font-weight-bold">Induk Kategori</label>
-                            <select id="select_category_parent" name="parent_category" data-placeholder=""
+                            <select id="select_category_parent" name="parent_category" data-placeholder="pilih induk kategori"
                                 class="custom-select w-100">
+                                @if (old('parent_category'))
+                                    <option value="{{ old('parent_category')->id }}" selected>{{ old('parent_category')->title }}
+                                    </option>
+                                @endif
                             </select>
                         </div>
                         <!-- description -->
@@ -77,8 +82,9 @@
                             <label for="input_category_description" class="font-weight-bold">
                                 Deskripsi
                             </label>
-                            <textarea id="input_category_description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3"
-                                placeholder="Masukkan deskripsi disini..."></textarea>
+                            <textarea id="input_category_description" name="description"
+                                class="form-control @error('description') is-invalid @enderror" rows="3"
+                                placeholder="Masukkan deskripsi disini...">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
