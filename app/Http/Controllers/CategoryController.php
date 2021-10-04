@@ -82,10 +82,8 @@ class CategoryController extends Controller
                 $request['parent_category'] = Category::select('id', 'title')->find($request->parent_category);
             }
             Alert::error('Tambah Kategori', 'Error'.$th->getMessage());
-            return redirect()->back()->withInput($request->all())->withErrors($validator);
+            return redirect()->back()->withInput($request->all());
         }
-        //proses insert data
-        dd("proses insert data", $request->all());
     }
 
     /**
@@ -134,10 +132,24 @@ class CategoryController extends Controller
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
         
-        dd(
-            $request->all(),
-            $category
-        );
+        //proses update data kategori
+        try {
+            $category->update([
+                'title' => $request->title,
+                'slug' => $request->slug,
+                'thumbnail' => parse_url($request->thumbnail)['path'],
+                'description' => $request->description,
+                'parent_id' => $request->parent_category
+            ]);
+            Alert::success('Edit Kategori', 'Berhasil');
+            return redirect()->route('categories.index');
+        } catch (\Throwable $th) {
+            if ($request->has('parent_category')) {
+                $request['parent_category'] = Category::select('id', 'title')->find($request->parent_category);
+            }
+            Alert::error('Edit Kategori', 'Gagal'.$th->getMessage());
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**
