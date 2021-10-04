@@ -14,8 +14,21 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::whereNull('parent_id')->with('descendants')->get();
+        $categories = Category::onlyParent()->with('descendants')->get();
         return view('categories.index', compact('categories'));
+    }
+
+    public function select(Request $request)
+    {
+        $categories = [];
+        if ($request->has('q')) {
+            $search = $request->q;
+            $categories = Category::select('id', 'title')->where('title', 'LIKE', "%$search%")->limit(6)->get();
+        } else {
+            $categories = Category::select('id', 'title')->OnlyParent()->limit(6)->get();
+        }
+
+        return response()->json($categories);
     }
 
     /**
@@ -25,7 +38,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**

@@ -13,7 +13,7 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 
 // Dashboard
 Breadcrumbs::for('dashboard', function ($trail) {
-    $trail->push('Dashboard', route('dashboard.index'));
+    $trail->push('Beranda', route('dashboard.index'));
 });
 
 //Dashboard > Home
@@ -25,7 +25,13 @@ Breadcrumbs::for('dashboard_home', function ($trail) {
 //Dashboard > Categories
 Breadcrumbs::for('categories', function ($trail) {
     $trail->parent('dashboard');
-    $trail->push('Categories', route('categories.index'));
+    $trail->push('Kategori', route('categories.index'));
+});
+
+//Dashboard > Categories > Add Category
+Breadcrumbs::for('add_category', function ($trail) {
+    $trail->parent('categories');
+    $trail->push('Tambah Kategori', route('categories.create'));
 });
 
 // Home > Blog
