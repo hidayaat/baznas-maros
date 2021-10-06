@@ -29,6 +29,9 @@ Route::group(['prefix' => 'dashboard', 'middleware'=> ['web', 'auth']], function
     //Categories
     Route::get('/categories/select', [\App\Http\Controllers\CategoryController::class, 'select'])->name('categories.select');
     Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
+    
+    //Tags
+    Route::resource('/tags', \App\Http\Controllers\TagController::class);
 
     //file manager
     Route::group(['prefix' => 'filemanager'], function () {
