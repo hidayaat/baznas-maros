@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                           {{-- Form Search --}}
+                            {{-- Form Search --}}
                             <form action="{{ route('categories.index') }}" method="GET">
                                 <div class="input-group">
                                     <input name="keyword" type="search" class="form-control"
@@ -42,12 +42,29 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <!-- list category -->
-                        @include('categories._categories-list',[
-                        'categories'=> $categories,
-                        'count' => 0
-                        ])
+                        @if (count($categories))
+                            @include('categories._categories-list',[
+                            'categories'=> $categories,
+                            'count' => 0
+                            ])
+                        @else
+                            <p>
+                                <strong>
+                                    @if (request()->get('keyword'))
+                                        Kategori {{ request()->get('keyword') }} tidak ditemukan
+                                    @else
+                                        Data kategori belum ada
+                                    @endif
+                                </strong>
+                            </p>
+                        @endif
                     </ul>
                 </div>
+                @if ($categories->hasPages())
+                <div class="card-footer">
+                    {{ $categories->links('vendor.pagination.bootstrap-4') }}
+                </div>
+                @endif
             </div>
         </div>
     </div>
