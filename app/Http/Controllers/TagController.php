@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TagController extends Controller
 {
@@ -36,7 +37,14 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Validator::make(
+            $request->all(),
+            [
+                'title' => 'required|string|max:25',
+                'slug' => 'required|string|unique:tags,slug'
+            ],
+            [],
+        )->validate();
     }
 
     /**

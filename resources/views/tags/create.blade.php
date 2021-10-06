@@ -13,22 +13,40 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('tags.store') }}" method="POST">
+                        @csrf
                         <!-- title -->
                         <div class="form-group">
                             <label for="input_tag_title" class="font-weight-bold">
                                 Judul
                             </label>
-                            <input id="input_tag_title" value="" name="title" type="text" class="form-control"
+                            <input id="input_tag_title" value=" {{ old('title') }}" name="title" type="text"
+                            class="form-control @error('title') is-invalid @enderror"
                                 placeholder="Masukkan judul tag" />
+                                @error('title')
+                                    <span class="invalid-feedback">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
                         </div>
                         <!-- slug -->
                         <div class="form-group">
                             <label for="input_tag_slug" class="font-weight-bold">
                                 Slug
                             </label>
-                            <input id="input_tag_slug" value="" name="slug" type="text" class="form-control" placeholder=""
-                                readonly />
+                            <input id="input_tag_slug" value="{{ old('slug') }}" name="slug" type="text" 
+                            class="form-control @error('slug') is-invalid @enderror"
+                            placeholder=""
+                                readonly /> 
+                                @error('slug')
+                                    <span class="invalid-feedback">
+                                        <strong>
+                                            {{ $message }}
+                                        </strong>
+                                    </span>
+                                @enderror
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary px-4 mx-2" href="{{ route('tags.index') }}">Kembali</a>
