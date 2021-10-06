@@ -69,3 +69,10 @@ Breadcrumbs::for('add_tag', function ($trail) {
     $trail->parent('tags');
     $trail->push('Tambah Tag', route('tags.create'));
 });
+
+//Dashboard > Tags > Edit > [judul]
+Breadcrumbs::for('edit_tag', function ($trail, $tag) {
+    $trail->parent('tags');
+    $trail->push('Edit', route('tags.edit', ['tag'=>$tag] ));
+    $trail->push($tag->title, route('tags.edit', ['tag'=>$tag] ));
+});

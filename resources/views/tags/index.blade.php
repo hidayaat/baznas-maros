@@ -46,11 +46,14 @@
                                     </label>
                                     <div>
                                         <!-- edit -->
-                                        <a class="btn btn-sm btn-info" role="button">
+                                        <a href="{{ route('tags.edit', ['tag' => $tag]) }}" class="btn btn-sm btn-info"
+                                            role="button">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <!-- delete -->
-                                        <form class="d-inline" action="" method="POST">
+                                        <form class="d-inline" role="alert" alert-text="Yakin ingin menghapus tag {{ old('title', $tag->title) }} ?" action="{{ route('tags.destroy', ['tag' => $tag]) }}" method="POST">
+                                          @csrf
+                                          @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -72,3 +75,30 @@
     </div>
 
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function() {
+
+            //event :delete tag
+            $("form[role='alert']").submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Hapus Tag",
+                    text: $(this).attr('alert-text'),
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonText: "Batal",
+                    reverseButtons: true,
+                    confirmButtonText: "Hapus",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+@endpush

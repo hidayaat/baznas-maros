@@ -79,7 +79,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('tags.edit', compact('tag'));
     }
 
     /**
@@ -91,7 +91,26 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        Validator::make(
+            $request->all(),
+            [
+                'title' => 'required|string|max:25',
+                'slug' => 'required|string|unique:tags,slug,' . $tag->id
+            ],
+            []
+        )->validate();
+        
+        try {
+            $tag->update([
+                'title' => $request->title,
+                'slug' => $request->slug
+            ]);  
+            Alert::success('Edit Tag','Berhasil');
+            return redirect()->route('tags.index');
+        } catch (\Throwable $th) {
+            Alert::error('Edit Tag', 'Terjadi kesalahan saat menyimpan tag. '.$th->getMessage());
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**
@@ -102,6 +121,12 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        try {
+            $tag->delete();  
+            Alert::success('Hapus Tag','Berhasil');
+        } catch (\Throwable $th) {
+            Alert::error('Edit Tag', 'Terjadi kesalahan saat menghapus tag. '.$th->getMessage());
+        }
+        return redirect()->back();
     }
 }
