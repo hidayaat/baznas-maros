@@ -8,8 +8,8 @@
                 Dashboard
             </a>
             <div class="sb-sidenav-menu-heading">Master</div>
-
-            <a class="nav-link" href="#">
+            {{-- link: posts --}}
+            <a class="nav-link {{ set_active(['categories.index']) }}" href="{{ route('posts.index') }}">
                 <div class="sb-nav-link-icon">
                     <i class="far fa-newspaper"></i>
                 </div>

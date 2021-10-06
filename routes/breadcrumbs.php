@@ -76,3 +76,10 @@ Breadcrumbs::for('edit_tag', function ($trail, $tag) {
     $trail->push('Edit', route('tags.edit', ['tag'=>$tag] ));
     $trail->push($tag->title, route('tags.edit', ['tag'=>$tag] ));
 });
+
+
+//Dashboard > Posts
+Breadcrumbs::for('posts', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Posts', route('posts.index'));
+});
