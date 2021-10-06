@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TagController extends Controller
 {
@@ -45,6 +46,18 @@ class TagController extends Controller
             ],
             [],
         )->validate();
+
+        try {
+            Tag::create([
+                'title' => $request->title,
+                'slug' => $request->slug
+            ]);    
+            Alert::success('Tambah Tag','Berhasil');
+            return redirect()->route('tags.index');
+        } catch (\Throwable $th) {
+            Alert::error('Tambah Tag', 'Terjadi kesalahan saat menyimpan tag. '.$th->getMessage());
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**

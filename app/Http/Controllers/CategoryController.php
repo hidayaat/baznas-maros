@@ -89,7 +89,7 @@ class CategoryController extends Controller
             if ($request->has('parent_category')) {
                 $request['parent_category'] = Category::select('id', 'title')->find($request->parent_category);
             }
-            Alert::error('Tambah Kategori', 'Error'.$th->getMessage());
+            Alert::error('Tambah Kategori', 'Terjadi kesalahan saat menyimpan kategori'.$th->getMessage());
             return redirect()->back()->withInput($request->all());
         }
     }

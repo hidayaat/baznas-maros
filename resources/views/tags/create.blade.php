@@ -21,32 +21,29 @@
                                 Judul
                             </label>
                             <input id="input_tag_title" value=" {{ old('title') }}" name="title" type="text"
-                            class="form-control @error('title') is-invalid @enderror"
-                                placeholder="Masukkan judul tag" />
-                                @error('title')
-                                    <span class="invalid-feedback">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
+                                class="form-control @error('title') is-invalid @enderror" placeholder="Masukkan judul tag" />
+                            @error('title')
+                                <span class="invalid-feedback">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                            @enderror
                         </div>
                         <!-- slug -->
                         <div class="form-group">
                             <label for="input_tag_slug" class="font-weight-bold">
                                 Slug
                             </label>
-                            <input id="input_tag_slug" value="{{ old('slug') }}" name="slug" type="text" 
-                            class="form-control @error('slug') is-invalid @enderror"
-                            placeholder=""
-                                readonly /> 
-                                @error('slug')
-                                    <span class="invalid-feedback">
-                                        <strong>
-                                            {{ $message }}
-                                        </strong>
-                                    </span>
-                                @enderror
+                            <input id="input_tag_slug" value="{{ old('slug') }}" name="slug" type="text"
+                                class="form-control @error('slug') is-invalid @enderror" placeholder="" readonly />
+                            @error('slug')
+                                <span class="invalid-feedback">
+                                    <strong>
+                                        {{ $message }}
+                                    </strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary px-4 mx-2" href="{{ route('tags.index') }}">Kembali</a>
@@ -72,7 +69,7 @@
                     .replace(/-+/g, '-').replace(/^-|-$/g, "")
             }
             //event :slug
-            $("#input_tag_title").change(function (event) {
+            $("#input_tag_title").change(function(event) {
                 $('#input_tag_slug').val(generateSlug(event.target.value))
             });
         });
