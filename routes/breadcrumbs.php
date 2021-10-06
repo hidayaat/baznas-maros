@@ -83,3 +83,8 @@ Breadcrumbs::for('posts', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Posts', route('posts.index'));
 });
+
+Breadcrumbs::for('add_post', function ($trail) {
+    $trail->parent('posts');
+    $trail->push('Tambah Post', route('posts.create'));
+});
