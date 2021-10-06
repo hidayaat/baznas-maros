@@ -18,10 +18,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="" method="GET">
+                           {{-- Form Search --}}
+                            <form action="{{ route('categories.index') }}" method="GET">
                                 <div class="input-group">
                                     <input name="keyword" type="search" class="form-control"
-                                        placeholder="Search for categories">
+                                        placeholder="Search for categories" value="{{ request()->get('') }}">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
