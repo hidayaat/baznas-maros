@@ -16,9 +16,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="" method="GET">
+                            {{-- Form : search --}}
+                            <form action="{{ route('tags.index') }}" method="GET">
                                 <div class="input-group">
-                                    <input name="keyword" type="search" class="form-control" placeholder="Cari tag">
+                                    <input name="keyword" value="{{ request()->get('keyword') }}" type="search"
+                                        class="form-control" placeholder="Cari tag">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
@@ -51,9 +53,11 @@
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <!-- delete -->
-                                        <form class="d-inline" role="alert" alert-text="Yakin ingin menghapus tag {{ old('title', $tag->title) }} ?" action="{{ route('tags.destroy', ['tag' => $tag]) }}" method="POST">
-                                          @csrf
-                                          @method('DELETE')
+                                        <form class="d-inline" role="alert"
+                                            alert-text="Yakin ingin menghapus tag {{ old('title', $tag->title) }} ?"
+                                            action="{{ route('tags.destroy', ['tag' => $tag]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -64,12 +68,21 @@
                         @else
                             <p>
                                 <strong>
-                                    Tidak ada data
+                                    @if (request()->get('keyword'))
+                                        Tag {{ request()->get('keyword') }} tidak ditemukan
+                                    @else
+                                        Data tag belum ada
+                                    @endif
                                 </strong>
                             </p>
                         @endif
                     </ul>
                 </div>
+                @if ($tags->hasPages())
+                <div class="card-footer">
+                    {{ $tags->links('vendor.pagination.bootstrap-4') }}
+                </div>
+                @endif
             </div>
         </div>
     </div>
