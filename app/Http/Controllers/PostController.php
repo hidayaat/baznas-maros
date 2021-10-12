@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -27,7 +29,8 @@ class PostController extends Controller
     public function create()
     {
         return view('posts.create', [
-            'categories' => Category::with('descendants')->onlyParent()->get()
+            'categories' => Category::with('descendants')->onlyParent()->get(),
+            'statuses' => $this->statuses()
         ]);
     }
 
@@ -39,7 +42,45 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //proses validasi data kategori
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:60',
+            'slug' => 'required|string|unique:categories,slug',
+            'thumbnail' => 'required',
+            'description' => 'required|string|max:240',
+            'content' => 'required',
+            'category' => 'required',
+            'tag' => 'required',
+            'status' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            if ($request->has('tag')) {
+                $request['tag'] = Tag::select('id', 'title')->whereIn('id', $request->tag)->get();
+            }
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
+        }
+
+        dd($request->all());
+
+        // //proses insert data kategori
+        // try {
+        //     Category::create([
+        //         'title' => $request->title,
+        //         'slug' => $request->slug,
+        //         'thumbnail' => parse_url($request->thumbnail)['path'],
+        //         'description' => $request->description,
+        //         'parent_id' => $request->parent_category
+        //     ]);
+        //     Alert::success('Tambah Kategori', 'Berhasil');
+        //     return redirect()->route('categories.index');
+        // } catch (\Throwable $th) {
+        //     if ($request->has('parent_category')) {
+        //         $request['parent_category'] = Category::select('id', 'title')->find($request->parent_category);
+        //     }
+        //     Alert::error('Tambah Kategori', 'Terjadi kesalahan saat menyimpan kategori'.$th->getMessage());
+        //     return redirect()->back()->withInput($request->all());
+        // }
     }
 
     /**
@@ -85,5 +126,13 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    private function statuses()
+    {
+        return[
+            'draft' => 'Draft',
+            'publish' => 'Terbitkan',
+        ];
     }
 }
