@@ -43,7 +43,7 @@ Breadcrumbs::for('edit_category', function ($trail, $category) {
 //Dashboard > Categories > Edit Category > Title
 Breadcrumbs::for('edit_category_title', function ($trail, $category) {
     $trail->parent('edit_category', $category);
-    $trail->push($category->title, route('categories.edit',['category' => $category]));
+    $trail->push($category->title, route('categories.edit', ['category' => $category]));
 });
 
 //Dashboard > Categories > Detail
@@ -55,7 +55,7 @@ Breadcrumbs::for('detail_category', function ($trail, $category) {
 //Dashboard > Categories > Detail Category > Title
 Breadcrumbs::for('detail_category_title', function ($trail, $category) {
     $trail->parent('detail_category', $category);
-    $trail->push($category->title, route('categories.show',['category' => $category]));
+    $trail->push($category->title, route('categories.show', ['category' => $category]));
 });
 
 //Dashboard > Tags
@@ -73,8 +73,8 @@ Breadcrumbs::for('add_tag', function ($trail) {
 //Dashboard > Tags > Edit > [judul]
 Breadcrumbs::for('edit_tag', function ($trail, $tag) {
     $trail->parent('tags');
-    $trail->push('Edit', route('tags.edit', ['tag'=>$tag] ));
-    $trail->push($tag->title, route('tags.edit', ['tag'=>$tag] ));
+    $trail->push('Edit', route('tags.edit', ['tag' => $tag]));
+    $trail->push($tag->title, route('tags.edit', ['tag' => $tag]));
 });
 
 
@@ -84,7 +84,23 @@ Breadcrumbs::for('posts', function ($trail) {
     $trail->push('Posts', route('posts.index'));
 });
 
+//Dashboard > Posts > Add
 Breadcrumbs::for('add_post', function ($trail) {
     $trail->parent('posts');
     $trail->push('Tambah Post', route('posts.create'));
+});
+
+//Dashboard > Posts > Detail > [title]
+Breadcrumbs::for('detail_post', function ($trail, $post) {
+    $trail->parent('posts');
+    $trail->push('Detail', route('posts.show', ['post' => $post]));
+    $trail->push($post->title, route('posts.create', ['post' => $post]));
+});
+
+//Dashboard > Posts > Edit > [title]
+
+Breadcrumbs::for('edit_post', function ($trail, $post) {
+    $trail->parent('posts');
+    $trail->push('Edit', route('posts.edit', ['post' => $post]));
+    $trail->push($post->title, route('posts.edit', ['post' => $post]));
 });

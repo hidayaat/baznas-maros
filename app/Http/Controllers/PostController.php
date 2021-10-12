@@ -7,7 +7,9 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 class PostController extends Controller
 {
     /**
@@ -61,26 +63,34 @@ class PostController extends Controller
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
 
-        dd($request->all());
+        //proses insert data kategori
+        DB::beginTransaction();
+        try {
+            $post = Post::create([
+                'title' => $request->title,
+                'slug' => $request->slug,
+                'thumbnail' => parse_url($request->thumbnail)['path'],
+                'description' => $request->description,
+                'parent_id' => $request->parent_category,
+                'content' => $request->content,
+                'status' => $request->status,
+                'user_id' => Auth::user()->id,
+            ]);
+            $post->tags()->attach($request->tag);
+            $post->categories()->attach($request->category);
 
-        // //proses insert data kategori
-        // try {
-        //     Category::create([
-        //         'title' => $request->title,
-        //         'slug' => $request->slug,
-        //         'thumbnail' => parse_url($request->thumbnail)['path'],
-        //         'description' => $request->description,
-        //         'parent_id' => $request->parent_category
-        //     ]);
-        //     Alert::success('Tambah Kategori', 'Berhasil');
-        //     return redirect()->route('categories.index');
-        // } catch (\Throwable $th) {
-        //     if ($request->has('parent_category')) {
-        //         $request['parent_category'] = Category::select('id', 'title')->find($request->parent_category);
-        //     }
-        //     Alert::error('Tambah Kategori', 'Terjadi kesalahan saat menyimpan kategori'.$th->getMessage());
-        //     return redirect()->back()->withInput($request->all());
-        // }
+            Alert::success('Tambah Posts', 'Berhasil');
+            return redirect()->route('posts.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Alert::error('Tambah Posts', 'Terjadi kesalahan saat menyimpan post'.$th->getMessage());
+            if ($request->has('tag')) {
+                $request['tag'] = Tag::select('id', 'title')->whereIn('id', $request->tag)->get();
+            }
+            return redirect()->back()->withInput($request->all());
+        } finally{
+            DB::commit();
+        }
     }
 
     /**
@@ -91,7 +101,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $categories = $post->categories;
+        $tags = $post->tags;
+        return view('posts.detail', compact('post', 'categories', 'tags'));
     }
 
     /**
@@ -102,7 +114,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', [
+            'post' => $post,
+            'categories' => Category::with('descendants')->onlyParent()->get(),
+            'statuses' => $this->statuses()
+        ]);
     }
 
     /**
@@ -132,7 +148,7 @@ class PostController extends Controller
     {
         return[
             'draft' => 'Draft',
-            'publish' => 'Terbitkan',
+            'publish' => 'Terbit',
         ];
     }
 }

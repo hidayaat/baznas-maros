@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    Tambah Post
+    Edit Post
 @endsection
 
 @section('breadcrumbs')
-    {{ Breadcrumbs::render('add_post') }}
+    {{ Breadcrumbs::render('edit_post', $post) }}
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
                                     <label for="input_post_title" class="font-weight-bold">
                                         Judul
                                     </label>
-                                    <input id="input_post_title" value="{{ old('title') }}" name="title" type="text"
+                                    <input id="input_post_title" value="{{ old('title', $post->title) }}" name="title" type="text"
                                         class="form-control
                                     @error('title')
                                         is-invalid
@@ -41,7 +41,7 @@
                                     <label for="input_post_slug" class="font-weight-bold">
                                         Slug
                                     </label>
-                                    <input id="input_post_slug" value="{{ old('slug') }}" name="slug" type="text"
+                                    <input id="input_post_slug" value="{{ old('slug', $post->slug) }}" name="slug" type="text"
                                         class="form-control
                                     @error('slug')
                                         is-invalid
@@ -67,7 +67,7 @@
                                                 Browse
                                             </button>
                                         </div>
-                                        <input id="input_post_thumbnail" name="thumbnail" value="{{ old('thumbnail') }}" type="text"
+                                        <input id="input_post_thumbnail" name="thumbnail" value="{{ old('thumbnail', asset($post->thumbnail)) }}" type="text"
                                             class="form-control
                                             @error('thumbnail')
                                                 is-invalid 
@@ -93,7 +93,7 @@
                                         @error('description')
                                             is-invalid
                                         @enderror"
-                                        rows="3">{{ old('description') }}</textarea>
+                                        rows="3">{{ old('description', $post->description) }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback">
                                             <strong>
@@ -112,7 +112,7 @@
                                     @error('content')
                                         is-invalid
                                     @enderror"
-                                        rows="20">{{ old('content') }}</textarea>
+                                        rows="20">{{ old('content', $post->content) }}</textarea>
                                     @error('content')
                                         <span class="invalid-feedback">
                                             <strong>
@@ -136,7 +136,7 @@
                                         {{-- List category --}}
                                         @include('posts._category-list', [
                                         'categories' => $categories,
-                                        'categoryChecked' => old('category')
+                                        'categoryChecked'=> old('category', $post->categories->pluck('id')->toArray())
                                         ])
                                         {{-- list category --}}
                                     </div>
@@ -163,8 +163,8 @@
                                             is-invalid
                                         @enderror"
                                         multiple>
-                                        @if (old('tag'))
-                                            @foreach (old('tag') as $tag)
+                                        @if (old('tag', $post->tags))
+                                            @foreach (old('tag', $post->tags) as $tag)
                                                 <option value="{{ $tag->id }}" selected>{{ $tag->title }}</option>
                                             @endforeach
                                             
@@ -189,7 +189,7 @@
                                         is-invalid
                                     @enderror">
                                         @foreach ($statuses as $key => $value)
-                                            <option value="{{ $key }}" {{ old('status') == $key ? "selected" : null }}>{{ $value }}</option>
+                                            <option value="{{ $key }}" {{ old('status', $post->status) == $key ? "selected" : null }}>{{ $value }}</option>
                                         @endforeach
                                     </select>
                                     @error('status')
@@ -205,9 +205,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="float-right">
-                                    <a class="btn btn-warning px-4" href="">Back</a>
+                                    <a class="btn btn-warning px-4" href="">Kembali</a>
                                     <button type="submit" class="btn btn-primary px-4">
-                                        Save
+                                        Edit
                                     </button>
                                 </div>
                             </div>
