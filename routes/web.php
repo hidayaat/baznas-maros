@@ -39,6 +39,9 @@ Route::group(['prefix' => 'dashboard', 'middleware'=> ['web', 'auth']], function
 
     //file manager
     Route::group(['prefix' => 'filemanager'], function () {
+        Route::get('/index',
+        [\App\Http\Controllers\FileManagerController::class, 'index'])
+        ->name('filemanager.index');
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
    
