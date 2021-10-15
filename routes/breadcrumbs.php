@@ -94,7 +94,7 @@ Breadcrumbs::for('add_post', function ($trail) {
 Breadcrumbs::for('detail_post', function ($trail, $post) {
     $trail->parent('posts');
     $trail->push('Detail', route('posts.show', ['post' => $post]));
-    $trail->push($post->title, route('posts.create', ['post' => $post]));
+    $trail->push($post->title, route('posts.show', ['post' => $post]));
 });
 
 //Dashboard > Posts > Edit > [title]
@@ -109,4 +109,23 @@ Breadcrumbs::for('edit_post', function ($trail, $post) {
 Breadcrumbs::for('file_manager', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('File Manager', route('filemanager.index'));
+});
+
+//Dashboard > Roles
+Breadcrumbs::for('roles', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Roles', route('posts.index'));
+});
+
+//Dashboard > Roles
+Breadcrumbs::for('add_role', function ($trail) {
+    $trail->parent('roles');
+    $trail->push('Tambah Roles', route('roles.create'));
+});
+
+//Dashboard > Roles > Detail > [title]
+Breadcrumbs::for('detail_role', function ($trail, $role) {
+    $trail->parent('roles');
+    $trail->push('Detail', route('roles.show', ['role' => $role]));
+    $trail->push($role->name, route('roles.show', ['role' => $role]));
 });

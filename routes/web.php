@@ -44,5 +44,6 @@ Route::group(['prefix' => 'dashboard', 'middleware'=> ['web', 'auth']], function
         ->name('filemanager.index');
         \UniSharp\LaravelFilemanager\Lfm::routes();
     });
-   
+   //roles  
+    Route::resource('/roles', \App\Http\Controllers\RoleController::class);
 });
