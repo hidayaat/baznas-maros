@@ -13,7 +13,7 @@ use function GuzzleHttp\Promise\all;
 
 class RoleController extends Controller
 {
-    private $perPage = 2;
+    private $perPage = 10;
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +30,16 @@ class RoleController extends Controller
         return view('roles.index', [
             'roles' => $roles->appends(['keyword' => $request->keyword])
         ]);
+    }
+
+    public function select(Request $request)
+    {
+        $roles = Role::select('id', 'name')->limit(7);
+        if ($request->has('q')) {
+            $roles->where('name', 'LIKE', "%{$request->q}%");
+        }
+
+        return response()->json($roles->get());
     }
 
     /**
@@ -59,9 +69,6 @@ class RoleController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // if ($request->has('tag')) {
-            //     $request['tag'] = Tag::select('id', 'title')->whereIn('id', $request->tag)->get();
-            // }
             return redirect()->back()->withInput($request->all())->withErrors($validator);
         }
 

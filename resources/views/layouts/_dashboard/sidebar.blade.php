@@ -32,14 +32,15 @@
                 Tags
             </a>
             <div class="sb-sidenav-menu-heading">User permission</div>
-            <a class="nav-link" href="#">
+            {{-- link:users --}}
+            <a class="nav-link {{ set_active(['users.index', 'users.create']) }}" href="{{ route('users.index') }}">
                 <div class="sb-nav-link-icon">
                     <i class="fas fa-user"></i>
                 </div>
                 User
             </a>
 
-            {{-- ling:roles --}}
+            {{-- link:roles --}}
             <a class="nav-link {{ set_active(['roles.index', 'roles.show','roles.create', 'roles.edit']) }}" href="{{route('roles.index')}}">
                 <div class="sb-nav-link-icon">
                     <i class="fas fa-user-shield"></i>

@@ -117,7 +117,7 @@ Breadcrumbs::for('roles', function ($trail) {
     $trail->push('Roles', route('posts.index'));
 });
 
-//Dashboard > Roles
+//Dashboard > Roles >tambah role
 Breadcrumbs::for('add_role', function ($trail) {
     $trail->parent('roles');
     $trail->push('Tambah Roles', route('roles.create'));
@@ -136,4 +136,16 @@ Breadcrumbs::for('edit_role', function ($trail, $role) {
     $trail->parent('roles');
     $trail->push('Edit', route('roles.edit', ['role' => $role]));
     $trail->push($role->name, route('roles.edit', ['role' => $role]));
+});
+
+//Dashboard > Users
+Breadcrumbs::for('users', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Users', route('users.index'));
+});
+
+//Dashboard > Users >tambah user
+Breadcrumbs::for('add_user', function ($trail) {
+    $trail->parent('users');
+    $trail->push('Tambah User', route('users.create'));
 });
