@@ -16,10 +16,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="" method="GET">
+                            <form action="{{ route('roles.index') }}" method="GET">
                                 <div class="input-group">
-                                    <input name="keyword" type="search" class="form-control"
-                                        placeholder="Search for roles">
+                                    <input name="keyword" value="{{ request()->get('keyword') }}" type="search"
+                                        class="form-control" placeholder="cari role...">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
@@ -49,15 +49,21 @@
 
                                 <div>
                                     <!-- detail -->
-                                    <a href="{{ route('roles.show', ['role' => $role]) }}" class="btn btn-sm btn-primary" role="button">
+                                    <a href="{{ route('roles.show', ['role' => $role]) }}" class="btn btn-sm btn-primary"
+                                        role="button">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <!-- edit -->
-                                    <a class="btn btn-sm btn-info" role="button">
+                                    <a class="btn btn-sm btn-info" role="button"
+                                        href="{{ route('roles.edit', ['role' => $role]) }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <!-- delete -->
-                                    <form class="d-inline" action="" method="POST">
+                                    <form class="d-inline" role="alert"
+                                        alert-text="Yakin ingin menghapus role {{ old('role', $role->name) }} ?"
+                                        action="{{ route('roles.destroy', ['role' => $role]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
                                         </button>
@@ -67,7 +73,11 @@
                         @empty
                             <p>
                                 <strong>
-                                    Roles belum ada
+                                    @if (request()->get('keyword'))
+                                        Roles {{ request()->get('keyword') }} tidak ditemukan
+                                    @else
+                                        Roles belum ada
+                                    @endif
                                 </strong>
                             </p>
                         @endforelse
@@ -75,8 +85,40 @@
                         <!-- list role -->
                     </ul>
                 </div>
+                @if ($roles->hasPages())
+                    <div class="card-footer">
+                        {{ $roles->links('vendor.pagination.bootstrap-4') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function() {
+
+            //event :delete tag
+            $("form[role='alert']").submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Hapus Role",
+                    text: $(this).attr('alert-text'),
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonText: "Batal",
+                    reverseButtons: true,
+                    confirmButtonText: "Hapus",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+@endpush
