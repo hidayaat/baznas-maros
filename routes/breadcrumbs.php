@@ -149,3 +149,11 @@ Breadcrumbs::for('add_user', function ($trail) {
     $trail->parent('users');
     $trail->push('Tambah User', route('users.create'));
 });
+
+//Dashboard > Users > Edit > [title]
+
+Breadcrumbs::for('edit_user', function ($trail, $user) {
+    $trail->parent('users');
+    $trail->push('Edit', route('users.edit', ['user' => $user]));
+    $trail->push($user->name, route('users.edit', ['user' => $user]));
+});

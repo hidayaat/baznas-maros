@@ -20,7 +20,7 @@
                             <label for="input_user_name" class="font-weight-bold">
                                 Nama
                             </label>
-                            <input id="input_user_name" value="" name="name" type="text"
+                            <input id="input_user_name" value="{{ old('name') }}" name="name" type="text"
                                 class="form-control @error('name') is-invalid @enderror" placeholder=" Masukkan nama " />
                             @error('name')
                                 <span class="invalid-feedback">
@@ -38,6 +38,11 @@
                             </label>
                             <select id="select_user_role" name="role" data-placeholder="Masukkan role"
                                 class="custom-select w-100  @error('role') is-invalid @enderror">
+                                @if (old('role'))
+                                    <option value="{{ old('role')->id }}">
+                                        {{ old('role')->name }}
+                                    </option>
+                                @endif
                             </select>
                             <!-- error message -->
                             @error('role')
@@ -53,7 +58,7 @@
                             <label for="input_user_email" class="font-weight-bold">
                                 Email
                             </label>
-                            <input id="input_user_email" value="" name="email" type="email"
+                            <input id="input_user_email" value="{{ old('email') }}" name="email" type="email"
                                 class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan email"
                                 autocomplete="email" />
                             <!-- error message -->
