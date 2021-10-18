@@ -73,7 +73,10 @@ class CategoryController extends Controller
             'slug' => 'required|string|unique:categories,slug',
             'thumbnail' => 'required',
             'description' => 'required|string|max:240',
-        ]);
+        ],
+        [],
+        $this->attributes()
+    );
 
         if ($validator->fails()) {
             if ($request->has('parent_category')) {
@@ -184,5 +187,15 @@ class CategoryController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    private function attributes()
+    {
+        return [
+            'title' => trans('categories.form_control.input.title.attribute'),
+            'slug' => trans('categories.form_control.input.slug.attribute'),
+            'thumbnail' => trans('categories.form_control.input.thumbnail.attribute'),
+            'description' => trans('categories.form_control.textarea.description.attribute')
+        ];
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('title')
-    detail roles
+    Detail Roles
 @endsection
 @section('breadcrumbs')
     {{ Breadcrumbs::render('detail_role', $role) }}
@@ -19,14 +19,14 @@
                     <!-- permission -->
                     <div class="form-group">
                         <label for="input_role_permission" class="font-weight-bold">
-                            Permission
+                            {{ trans('roles.form_control.input.permission.label') }}
                         </label>
                         <div class="row">
                             <!-- list manage name:start -->
                             @forelse ($authorities as $manageName => $permissions)
                             <ul class="list-group mx-1">
                                 <li class="list-group-item bg-dark text-white">
-                                    {{ $manageName }}
+                                    {{ trans("permissions.{$manageName}") }}
                                 </li>
                                 @foreach ($permissions as $permission)
                                     <!-- list permission:start -->
@@ -35,7 +35,7 @@
                                         <input class="form-check-input" type="checkbox" value="" onclick="return false;"
                                         {{ in_array($permission, $rolePermissions) ? "checked" :null }}>
                                         <label class="form-check-label">
-                                            {{$permission}}
+                                            {{ trans("permissions.{$permission}") }}
                                         </label>
                                     </div>
                                 </li>

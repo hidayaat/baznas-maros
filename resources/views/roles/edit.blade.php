@@ -42,7 +42,7 @@
                                     @foreach ($authorities as $manageName => $permissions)
                                         <ul class="list-group mx-1">
                                             <li class="list-group-item bg-dark text-white">
-                                                {{ $manageName }}
+                                                {{ trans("permissions.{$manageName}") }}
                                             </li>
                                             <!-- list permission:start -->
                                             @foreach ($permissions as $permission)
@@ -59,7 +59,7 @@
                                                                 value="{{ $permission }}">
                                                         @endif
                                                         <label for="{{ $permission }}" class="form-check-label">
-                                                            {{ $permission }}
+                                                            {{ trans("permissions.{$permission}") }}
                                                         </label>
                                                     </div>
                                                 </li>

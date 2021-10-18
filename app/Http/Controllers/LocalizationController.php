@@ -18,7 +18,7 @@ class LocalizationController extends Controller
     // }
 
     //cara 2 method biasa
-    public function switch($language = 'en')
+    public function switch($language = 'id')
     {
         request()->session()->put('locale', $language);
         return redirect()->back();
