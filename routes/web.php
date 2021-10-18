@@ -12,6 +12,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Cara 1 Invokable
+// Route::get(
+//     '/localization/{language}',
+//     App\Http\Controllers\LocalizationController::class
+// )->name('localization.switch');
+
+//Cara 2 method biasa
+Route::get(
+    '/localization/{language}',
+    [App\Http\Controllers\LocalizationController::class, 'switch']
+)->name('localization.switch');
 
 Route::get('/', function () {
     return view('welcome');
