@@ -142,7 +142,7 @@ class TagController extends Controller
             $tag->delete();  
             Alert::success('Hapus Tag','Berhasil');
         } catch (\Throwable $th) {
-            Alert::error('Edit Tag', 'Terjadi kesalahan saat menghapus tag. '.$th->getMessage());
+            Alert::error('Hapus Tag', 'Terjadi kesalahan saat menghapus tag. '.$th->getMessage());
         }
         return redirect()->back();
     }

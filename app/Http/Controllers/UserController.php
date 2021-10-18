@@ -12,15 +12,23 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+    private $perPage = 15;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $users = [];
+        if ($request->get('keyword')) {
+            $users = User::search($request->keyword)->paginate($this->perPage);
+        } else {
+            $users = User::paginate($this->perPage);
+        }
+
         return view('users.index', [
-            'users' => User::all()
+            'users' => $users->appends(['keyword' => $request->keyword])
         ]);
     }
 
@@ -66,7 +74,8 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             Alert::error('Tambah User', 'Terjadi kesalahan saat mengedit role' . $th->getMessage());
-            return redirect()->back()->withInput($request->all());
+            $request['role'] = Role::select('id', 'name')->find($request->role);
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
         } finally {
             DB::commit();
         }
@@ -106,7 +115,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        
+
         $validator = Validator::make($request->all(), [
             'role' => 'required',
         ]);
@@ -123,7 +132,8 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             DB::rollBack();
             Alert::error('Edit User', 'Terjadi kesalahan saat mengedit user' . $th->getMessage());
-            return redirect()->back()->withInput($request->all());
+            $request['role'] = Role::select('id', 'name')->find($request->role);
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
         } finally {
             DB::commit();
         }
@@ -137,6 +147,18 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $user->removeRole($user->roles->first());
+            $user->delete();
+            Alert::success('Hapus User', 'Berhasil');
+            return redirect()->route('users.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Alert::error('Hapus User', 'Terjadi kesalahan saat menghapus user' . $th->getMessage());
+        } finally {
+            DB::commit();
+            return redirect()->back();
+        }
     }
 }
