@@ -32,10 +32,12 @@
                             </form>
                         </div>
                         <div class="col-md-6">
-                            <a href="{{ route('categories.create') }}" class="btn btn-primary float-right" role="button">
-                                Add new
-                                <i class="fas fa-plus-square"></i>
-                            </a>
+                            @can('category_create')
+                                <a href="{{ route('categories.create') }}" class="btn btn-primary float-right" role="button">
+                                    Add new
+                                    <i class="fas fa-plus-square"></i>
+                                </a>
+                            @endcan
                         </div>
                     </div>
                 </div>
@@ -61,9 +63,9 @@
                     </ul>
                 </div>
                 @if ($categories->hasPages())
-                <div class="card-footer">
-                    {{ $categories->links('vendor.pagination.bootstrap-4') }}
-                </div>
+                    <div class="card-footer">
+                        {{ $categories->links('vendor.pagination.bootstrap-4') }}
+                    </div>
                 @endif
             </div>
         </div>

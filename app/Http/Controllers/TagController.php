@@ -10,6 +10,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 class TagController extends Controller
 {
     private $perPage = 10;
+
+    public function __construct()
+    {
+        $this->middleware('permission:tag_show',['only' => 'index']);
+        $this->middleware('permission:tag_create',['only' => ['create', 'store']]);
+        $this->middleware('permission:tag_update',['only' => ['edit', 'update']]);
+        $this->middleware('permission:tag_delete',['only' => 'destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
