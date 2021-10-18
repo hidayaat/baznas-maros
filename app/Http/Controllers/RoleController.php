@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use App\Models\Role;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -165,15 +165,19 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        if (User::role($role->name)->count()) {
+            Alert::warning('Hapus Role', 'Maaf, role belum dapat dihapus. Karena masih digunakan.');
+            return redirect()->route('roles.index');
+        }
         //proses insert data kategori
         DB::beginTransaction();
         try {
             $role->revokePermissionTo($role->permissions->pluck('name')->toArray());
             $role->delete();
-            Alert::success('Edit Role', 'Berhasil');
+            Alert::success('Hapus Role', 'Berhasil');
         } catch (\Throwable $th) {
             DB::rollBack();
-            Alert::error('Edit Role', 'Terjadi kesalahan saat mengedit role' . $th->getMessage());
+            Alert::error('Hapus Role', 'Terjadi kesalahan saat mengedit role' . $th->getMessage());
         } finally {
             DB::commit();
         }
