@@ -12,7 +12,7 @@
    <!-- todo: css/script -->
 </head>
 
-<body class="bg-primary">
+<body class="bg-success">
    <div id="layoutAuthentication">
       <div id="layoutAuthentication_content">
          <main>
