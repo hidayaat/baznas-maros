@@ -2,7 +2,7 @@
     <a class="navbar-brand" href="#">
         <!-- show app name -->
         {{-- {{ config('app.name')}} --}}
-        <img src={{ asset('img/logo.png') }} alt="logo" style="height : 50px;">
+        <img src="{{ asset('vendor/img/logo.png') }}" alt="logo" style="height : 50px;">
     </a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>

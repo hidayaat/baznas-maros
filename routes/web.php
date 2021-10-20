@@ -24,9 +24,8 @@ Route::get(
     [App\Http\Controllers\LocalizationController::class, 'switch']
 )->name('localization.switch');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[\App\Http\Controllers\BlogController::class, 'home'])->name('blog.home');
+Route::get('/post/{slug}',[\App\Http\Controllers\BlogController::class, 'showPostDetail'])->name('blog.post.detail');
 
 Auth::routes([
     'register' => false,

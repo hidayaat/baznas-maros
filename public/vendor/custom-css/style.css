@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
+    padding-top: 56px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    margin-left: -15px;
+}
+
+.breadcrumb>li+li:before {
+    content: ">" !important;
+    padding: 0 5px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
