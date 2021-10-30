@@ -58,7 +58,7 @@
                                             alt="{{ $post->title }}">
                                     @endif
                                     <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}">
-                                        <h5 style="font-weight: bold">{{ $post->title }}</h5>
+                                        <h5 style="font-weight: bold; color: #005331">{{ $post->title }}</h5>
                                     </a>
                                         <p>{{ $post->description }}</p>
                                     

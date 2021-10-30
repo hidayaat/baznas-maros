@@ -16,8 +16,8 @@
                         <!-- Breadcrumb:Start -->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Beranda</a></li>
-                                <li class="breadcrumb-item"><a href="#">Post</a></li>
+                                <li class="breadcrumb-item"><a href="#" style="color: #005331">Beranda</a></li>
+                                <li class="breadcrumb-item"><a href="#" style="color: #005331">Post</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
                             </ol>
                         </nav>
@@ -70,7 +70,7 @@
                                     <div class="card-body">
                                         <!-- category list:start -->
                                         @foreach ($post->categories as $category)
-                                            <a href="" class="badge badge-primary py-2 px-4 my-1">
+                                            <a href="{{ route('blog.posts.category', ['slug'=>$category->slug]) }}" class="badge badge-primary py-2 px-4 my-1">
                                                 {{ $category->title }}
                                             </a>
                                         @endforeach

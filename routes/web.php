@@ -25,6 +25,9 @@ Route::get(
 )->name('localization.switch');
 
 Route::get('/',[\App\Http\Controllers\BlogController::class, 'home'])->name('blog.home');
+
+Route::get('/categories/{slug}',[\App\Http\Controllers\BlogController::class, 'showPostByCategory'])->name('blog.posts.category');
+
 Route::get('/post/{slug}',[\App\Http\Controllers\BlogController::class, 'showPostDetail'])->name('blog.post.detail');
 
 Auth::routes([

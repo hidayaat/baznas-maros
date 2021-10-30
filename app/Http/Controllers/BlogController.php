@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Category;
 
 class BlogController extends Controller
 {   
@@ -26,6 +27,21 @@ class BlogController extends Controller
 
         return view('blog.post-detail', [
             'post' => $post,
+        ]);
+    }
+
+    public function showPostByCategory($slug)
+    {
+        $post = Post::publish()->whereHas('categories', function ($query) use ($slug)
+        {
+            return $query->where('slug', $slug);
+        })->paginate($this->perPage);
+
+        $category = Category::where('slug', $slug)->first();
+
+        return view('blog.post-category',[
+            'posts' => $post,
+            'category' => $category
         ]);
     }
 
