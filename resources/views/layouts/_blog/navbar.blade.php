@@ -22,9 +22,9 @@
                     Tentang Kami
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Menu 1</a>
-                    <a class="dropdown-item" href="#">Menu 2</a>
-                    <a class="dropdown-item" href="#">Menu 3</a>
+                    <a class="dropdown-item" href="#">Visi dan Misi</a>
+                    <a class="dropdown-item" href="#">Struktur Organisasi</a>
+                    <a class="dropdown-item" href="#">Sejarah</a>
                 </div>
             </li>
             <!-- nav-categories:tags -->
