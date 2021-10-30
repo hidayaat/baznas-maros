@@ -27,6 +27,7 @@ class BlogController extends Controller
 
         return view('blog.post-detail', [
             'post' => $post,
+            'posts' => Post::publish()->latest()->paginate(3)
         ]);
     }
 

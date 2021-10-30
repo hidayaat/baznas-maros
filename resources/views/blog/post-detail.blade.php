@@ -70,7 +70,8 @@
                                     <div class="card-body">
                                         <!-- category list:start -->
                                         @foreach ($post->categories as $category)
-                                            <a href="{{ route('blog.posts.category', ['slug'=>$category->slug]) }}" class="badge badge-primary py-2 px-4 my-1">
+                                            <a href="{{ route('blog.posts.category', ['slug' => $category->slug]) }}"
+                                                class="badge badge-success py-2 px-4 my-1">
                                                 {{ $category->title }}
                                             </a>
                                         @endforeach
@@ -93,7 +94,39 @@
                                         <!-- tag list:end -->
                                     </div>
                                 </div>
-                                <!-- Side Widget tags:start -->
+
+                                <!-- Side Widget posts: start -->
+                                <div class="mb-3">
+
+                                    <h5 style="font-weight: bold">
+                                        Berita Terbaru
+                                    </h5>
+                                    
+                                        <div class="row">
+                                            <div class="col">
+                                                <!-- thumbnail:start -->
+                                                @if (file_exists(public_path($post->thumbnail)))
+                                                    <a href="">
+                                                        <img src="{{ asset($post->thumbnail) }}" class="card-img mb-3"
+                                                            alt="{{ $post->title }}">
+                                                    </a>
+                                                @else
+                                                    <img class="img-fluid rounded" src="http://placehold.it/750x300"
+                                                        alt="{{ $post->title }}">
+                                                @endif
+                                            </div>
+                                            <div class="col">
+                                                <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}">
+                                                    <h5 style="color: #005331">{{ $post->title }}</h5>
+                                                </a>
+                                                <small> <i class="far fa-calendar-alt"></i>
+                                                    {{ $post->created_at }}</small>
+                                                <!-- thumbnail:end -->
+                                            </div>
+                                        </div>
+                                    
+                                </div>
+
                             </div>
                             <!-- Sidebar Widgets Column:end -->
                         </div>
