@@ -60,6 +60,14 @@
                     Role
                 </a>
             @endcan
+            <div class="sb-sidenav-menu-heading">Donatur ZIS</div>
+            {{-- link : file manager --}}
+            <a class="nav-link {{ set_active(['filemanager.index']) }}" href="{{ route('filemanager.index') }}">
+                <div class="sb-nav-link-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                Donatur
+            </a>
             <div class="sb-sidenav-menu-heading">Settings</div>
             {{-- link : file manager --}}
             <a class="nav-link {{ set_active(['filemanager.index']) }}" href="{{ route('filemanager.index') }}">
