@@ -49,9 +49,9 @@
                             <div class="item">
                                 <div class="">
                                     @if (file_exists(public_path($post->thumbnail)))
-                                        <a href="">
-                                            <img src="{{ asset($post->thumbnail) }}" class="card-img-top mb-3"
-                                                alt="{{ $post->title }}">
+                                        <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}">
+                                            <img style="height: 100%" src="{{ asset($post->thumbnail) }}"
+                                                class="card-img-top mb-3" alt="{{ $post->title }}">
                                         </a>
                                     @else
                                         <img class="img-fluid rounded" src="http://placehold.it/750x300"
@@ -60,8 +60,8 @@
                                     <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}">
                                         <h5 style="font-weight: bold; color: #005331">{{ $post->title }}</h5>
                                     </a>
-                                        <p>{{ $post->description }}</p>
-                                    
+                                    <p>{{ $post->description }}</p>
+
                                     {{-- <p>{!! html_entity_decode($post->content) !!}</p> --}}
                                 </div>
                                 {{-- <div class="d-flex justify-content-center">
@@ -77,6 +77,64 @@
         </div>
     </section>
 
+    <section>
+        <div class="jumbotron text-center" style="
+            background-image: url('{{ asset('vendor/img/bg-cover.png') }}');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;">
+            <div class="container text-white align-items-center">
+                <h1 class="display-4 font-weight-bold">Mari Bersama Membangun Indonesia</h1>
+                <p class="lead">Terima kasih telah membantu kami, karena kebaikan anda, kmai telah menyalurkan
+                    amanah :</p>
+                <div class="row mt-5">
+                    <div class="col">
+                        <div style="
+                            background-color: rgba(255, 255, 255, 0.3);
+                            width: 100%;
+                            padding: 12px;">
+                            <h4 class="font-weight-bold">Rp. 3.000.000.000</h4>
+                            <p>Dana terhimpun</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div style="
+                            background-color: rgba(255, 255, 255, 0.3);
+                            width: 100%;
+                            padding: 12px;
+                            margin-horizontal: 20px;">
+                            <h4 class="font-weight-bold">Rp. 1.000.000.000</h4>
+                            <p>Dana tersalurkan</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div style="
+                            background-color: rgba(255, 255, 255, 0.3);
+                            width: 100%;
+                            padding: 12px;
+                            margin-horizontal: 20px;">
+                            <h4 class="font-weight-bold">1000 Orang</h4>
+                            <p>Muzakki</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div style="
+                            background-color: rgba(255, 255, 255, 0.3);
+                            width: 100%;
+                            padding: 12px;">
+                            <h4 class="font-weight-bold">500 Orang</h4>
+                            <p>Mustahiq</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="lead mt-5">
+                    <a class="btn btn-warning btn-lg" href="#" role="button">Bayar Zakat</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
     <section class="text-center p-5">
         <div class="container">
             <div class="row">
@@ -85,17 +143,17 @@
                     <div class="owl-carousel owl-theme video-slider-1">
 
                         <iframe onplay="pauseSlider();" onpause="playSlider();" onended="playSlider();" controls=""
-                            width="672" height="378" src="https://www.youtube.com/embed/8iEgci-npU8" frameborder="0"
+                            width="672" height="378" src="https://www.youtube.com/embed/GYRkuhJNeow" frameborder="0"
                             allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
 
                         <iframe onplay="pauseSlider();" onpause="playSlider();" onended="playSlider();" controls=""
-                            width="672" height="378" src="https://www.youtube.com/embed/8iEgci-npU8" frameborder="0"
+                            width="672" height="378" src="https://www.youtube.com/embed/5a4NydUWKrU" frameborder="0"
                             allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
 
                         <iframe onplay="pauseSlider();" onpause="playSlider();" onended="playSlider();" controls=""
-                            width="672" height="378" src="https://www.youtube.com/embed/8iEgci-npU8" frameborder="0"
+                            width="672" height="378" src="https://www.youtube.com/embed/0Y6sUTcozfI" frameborder="0"
                             allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>
@@ -164,5 +222,17 @@
         function pauseSlider() {
             window.owl.trigger('stop.owl.autoplay')
         }
+    </script>
+    <script>
+        var jumboHeight = $('.jumbotron').outerHeight();
+
+        function parallax() {
+            var scrolled = $(window).scrollTop();
+            $('.bg').css('height', (jumboHeight - scrolled) + 'px');
+        }
+
+        $(window).scroll(function(e) {
+            parallax();
+        });
     </script>
 @endsection

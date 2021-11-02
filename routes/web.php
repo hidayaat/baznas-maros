@@ -24,17 +24,20 @@ Route::get(
     [App\Http\Controllers\LocalizationController::class, 'switch']
 )->name('localization.switch');
 
+// route blog
 Route::get('/',[\App\Http\Controllers\BlogController::class, 'home'])->name('blog.home');
 
 Route::get('/categories/{slug}',[\App\Http\Controllers\BlogController::class, 'showPostByCategory'])->name('blog.posts.category');
 
 Route::get('/post/{slug}',[\App\Http\Controllers\BlogController::class, 'showPostDetail'])->name('blog.post.detail');
 
+
 Auth::routes([
     'register' => false,
 ]);
 
 
+// route dashboard
 Route::group(['prefix' => 'dashboard', 'middleware' => ['web', 'auth']], function () {
     //Dashboard
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
