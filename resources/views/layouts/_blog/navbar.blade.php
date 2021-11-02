@@ -54,7 +54,7 @@
         </ul>
     </div>
     <a clas=""href="">
-        <a class="btn btn-warning btn-lg text-right" href="{{ route('blog.post.zakat') }}" role="button">Bayar Zakat</a>
+        <a class="btn btn-warning btn-lg text-right" href="" role="button">Bayar Zakat</a>
     </a>
     {{-- <!-- Search for post:start -->
     <form class="input-group my-1 mr-5" action="" method="GET">
