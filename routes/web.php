@@ -31,6 +31,9 @@ Route::get('/categories/{slug}',[\App\Http\Controllers\BlogController::class, 's
 
 Route::get('/post/{slug}',[\App\Http\Controllers\BlogController::class, 'showPostDetail'])->name('blog.post.detail');
 
+Route::get('/bayar-zakat',[\App\Http\Controllers\BlogController::class, 'create'])->name('blog.create');
+
+Route::post('/bayar-zakat',[\App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
 
 Auth::routes([
     'register' => false,
@@ -68,4 +71,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['web', 'auth']], functio
 
     //user
     Route::resource('/users', \App\Http\Controllers\UserController::class)->except(['show']);
+
+    //donatur
+    Route::resource('/donors', \App\Http\Controllers\DonorsController::class)->except(['create', 'store']);
 });

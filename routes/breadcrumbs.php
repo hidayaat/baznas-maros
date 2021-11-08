@@ -157,3 +157,10 @@ Breadcrumbs::for('edit_user', function ($trail, $user) {
     $trail->push('Edit', route('users.edit', ['user' => $user]));
     $trail->push($user->name, route('users.edit', ['user' => $user]));
 });
+
+
+//Dashboard > Donatur
+Breadcrumbs::for('donors', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Donatur', route('donors.index'));
+});
