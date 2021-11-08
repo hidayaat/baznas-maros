@@ -16,14 +16,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <form action="" method="GET">
-                                <div class="input-group">
-                                    <input name="keyword" value="" type="search" class="form-control" placeholder="">
+                                <div class="input-group mx-1">
+                                    <input name="keyword" value="{{ request()->get('keyword') }}" type="search"
+                                        class="form-control" placeholder="Cari berdasarkan nama...">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="submit">
                                             <i class="fas fa-search"></i>
                                         </button>
                                     </div>
-                                </div>
+                                </div>                                
                             </form>
                         </div>
                     </div>
@@ -36,7 +37,8 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Nama</th>
-                                    <th scope="col">Email</th>
+                                    <th scope="col">No. Telp.</th>
+                                    <th scope="col">Nominal Donasi</th>
                                     <th scope="col">Jenis Titipan</th>
                                     <th></th>
                                 </tr>
@@ -47,16 +49,21 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $donor->first_name }} {{ $donor->last_name }}</td>
-                                        <td>{{ $donor->email }}</td>
+                                        <td>{{ $donor->phone }}</td>
+                                        <td>Rp. {{ $donor->donation }}</td>
                                         <td>{{ $donor->donation_category }}</td>
                                         <td class="text-right">
-                                            <a href="#" class="btn btn-sm btn-primary" role="button">
+                                            <a href="{{ route('donors.show', ['donor' => $donor]) }}" class="btn btn-sm btn-primary" role="button">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="#" class="btn btn-sm btn-info" role="button">
+                                            {{-- <a href="#" class="btn btn-sm btn-info" role="button">
                                                 <i class="fas fa-edit"></i>
-                                            </a>
-                                            <form action="" method="POST" role="alert" class="d-inline">
+                                            </a> --}}
+                                            <form class="d-inline" role="alert"
+                                                alert-text="Yakin ingin menghapus data?"
+                                                action="{{ route('donors.destroy', ['donor' => $donor]) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
@@ -89,3 +96,30 @@
         </div>
     </div>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function() {
+
+            //event :delete tag
+            $("form[role='alert']").submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "Hapus Data Donatur",
+                    text: $(this).attr('alert-text'),
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonText: "Batal",
+                    reverseButtons: true,
+                    confirmButtonText: "Hapus",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
+@endpush

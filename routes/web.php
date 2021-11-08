@@ -73,5 +73,5 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['web', 'auth']], functio
     Route::resource('/users', \App\Http\Controllers\UserController::class)->except(['show']);
 
     //donatur
-    Route::resource('/donors', \App\Http\Controllers\DonorsController::class)->except(['create', 'store']);
+    Route::resource('/donors', \App\Http\Controllers\DonorController::class)->except(['create', 'store']);
 });

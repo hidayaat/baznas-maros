@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Donors;
+use App\Models\Donor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class DonorsController extends Controller
+
+class DonorController extends Controller
 {
     private $perPage = 15;
     /**
@@ -17,9 +17,16 @@ class DonorsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Donors::paginate($this->perPage);
+        $donors = [];
+        if ($request->has('keyword')) {
+            $donors = Donor::where('first_name', 'LIKE', "%{$request->keyword}%")
+            ->orWhere('last_name', 'LIKE', "%{$request->keyword}%")->latest()
+            ->paginate($this->perPage);
+        } else {
+            $donors = Donor::latest()->paginate($this->perPage);
+        }
         return view('donors.index', [
-            'donors' => $data
+            'donors' => $donors->appends(['keyword' => $request->keyword])
         ])->with('i', ($request->input('page', 1) - 1) * $this->perPage);
     }
 
@@ -47,21 +54,24 @@ class DonorsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Donors  $Donors
+     * @param  \App\Models\Donor  $Donor
      * @return \Illuminate\Http\Response
      */
-    public function show(Donors $Donors)
+    public function show(Donor $donor)
     {
-        //
+        return view('donors.show', [
+            'donor' => $donor
+        ]);
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Donors  $Donors
+     * @param  \App\Models\Donor  $Donor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Donors $Donors)
+    public function edit(Donor $donor)
     {
         //
     }
@@ -70,10 +80,10 @@ class DonorsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Donors  $Donors
+     * @param  \App\Models\Donor  $Donor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Donors $Donors)
+    public function update(Request $request, Donor $donor)
     {
         //
     }
@@ -81,11 +91,18 @@ class DonorsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Donors  $Donors
+     * @param  \App\Models\Donor  $Donor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Donors $Donors)
+    public function destroy(Donor $donor)
     {
-        //
+        try {
+            $donor->delete();
+            Alert::success('Hapus Data Donatur', 'Berhasil');
+        } catch (\Throwable $th) {
+            Alert::error('Hapus Data Donatur', 'Gagal'.$th->getMessage());
+        }
+
+        return redirect()->back();
     }
 }

@@ -62,7 +62,7 @@
             @endcan
             <div class="sb-sidenav-menu-heading">Donatur ZIS</div>
             {{-- link : donatur --}}
-            <a class="nav-link {{ set_active(['donors.index']) }}" href="{{ route('donors.index') }}">
+            <a class="nav-link {{ set_active(['donors.index', 'donors.show']) }}" href="{{ route('donors.index') }}">
                 <div class="sb-nav-link-icon">
                     <i class="fas fa-hand-holding-heart"></i>
                 </div>
