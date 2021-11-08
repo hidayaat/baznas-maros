@@ -122,4 +122,9 @@ class BlogController extends Controller
 
     }
 
+    public function profil()
+    {
+        return view('blog.profil');
+    }
+
 }

@@ -35,6 +35,8 @@ Route::get('/bayar-zakat',[\App\Http\Controllers\BlogController::class, 'create'
 
 Route::post('/bayar-zakat',[\App\Http\Controllers\BlogController::class, 'store'])->name('blog.store');
 
+Route::get('/profil',[\App\Http\Controllers\BlogController::class, 'profil'])->name('blog.profil');
+
 Auth::routes([
     'register' => false,
 ]);

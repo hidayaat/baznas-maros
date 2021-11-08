@@ -22,7 +22,7 @@
                     Tentang Kami
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Profil</a>
+                    <a class="dropdown-item" href="{{ route('blog.profil') }}">Profil</a>
                     <a class="dropdown-item" href="#">Struktur Organisasi</a>
                 </div>
             </li>
@@ -47,7 +47,7 @@
                     Layanan
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Zakat Online</a>
+                    <a class="dropdown-item" href="{{ route('blog.create') }}">Zakat Online</a>
                     <a class="dropdown-item" href="#">Jemput Zakat</a>
                 </div>
             </li>
