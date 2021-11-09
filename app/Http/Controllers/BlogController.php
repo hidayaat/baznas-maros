@@ -50,6 +50,13 @@ class BlogController extends Controller
         ]);
     }
 
+    public function showCategories()
+    {
+        return view('blog.category', [
+            'categories' => Category::onlyParent()->paginate($this->perPage)
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

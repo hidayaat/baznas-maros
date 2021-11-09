@@ -63,10 +63,10 @@ class PostController extends Controller
     {
         //proses validasi data kategori
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:60',
+            'title' => 'required|string',
             'slug' => 'required|string|unique:categories,slug',
             'thumbnail' => 'required',
-            'description' => 'required|string|max:240',
+            'description' => 'required',
             'content' => 'required',
             'category' => 'required',
             'tag' => 'required',
@@ -149,10 +149,10 @@ class PostController extends Controller
     {
         //proses validasi data kategori
         $validator = Validator::make($request->all(), [
-            'title' => 'required|string|max:60',
+            'title' => 'required|string',
             'slug' => 'required|string|unique:categories,slug,' . $post->id,
             'thumbnail' => 'required',
-            'description' => 'required|string|max:240',
+            'description' => 'required',
             'content' => 'required',
             'category' => 'required',
             'tag' => 'required',

@@ -33,11 +33,20 @@
                     Program
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Ekonimi</a>
-                    <a class="dropdown-item" href="#">Pendidikan</a>
-                    <a class="dropdown-item" href="#">Kesehatan</a>
-                    <a class="dropdown-item" href="#">Dakwah & Advokasi</a>
-                    <a class="dropdown-item" href="#">Kemanusiaan</a>
+                    <p style="margin-bottom: -1px; margin-left: 10px; font-weight: bold;" class="font-wegiht-bold">Ekonomi</p>
+                    <a class="dropdown-item" href="#">Baznas Microfinance Desa (BMD)</a>
+                    <a class="dropdown-item" href="#">Lembaga Pemberdayaan Peternak Mustahik (LPPM)</a>
+                    <a class="dropdown-item" href="#">Zakat Community Development(ZCD)</a>
+                    <a class="dropdown-item" href="#">Lembaga Pemberdayaan Ekonomi Mustahik (LPEM)</a>
+                    <p style="margin-bottom: -1px; margin-left: 10px; margin-top: 10px; font-weight: bold;" class="font-wegiht-bold">Pendidikan</p>
+                    <a class="dropdown-item" href="#">Lembaga Pendidikan Baznas (LBB)</a>
+                    <a class="dropdown-item" href="#">Layanan Aktif Baznas (LAB)</a>
+                    <p style="margin-bottom: -1px; margin-left: 10px; margin-top: 10px; font-weight: bold;" class="font-wegiht-bold">Kesehatan</p>
+                    <a class="dropdown-item" href="#">Rumah Sehat Baznas (RSB)</a>
+                    <p style="margin-bottom: -1px; margin-left: 10px; margin-top: 10px; font-weight: bold;" class="font-wegiht-bold">Dakwah & Advokasi</p>
+                    <a class="dropdown-item" href="#">Muallaf Center Baznas (MCB)</a>
+                    <p style="margin-bottom: -1px; margin-left: 10px; margin-top: 10px; font-weight: bold;" class="font-wegiht-bold">Kemanusiaan</p>
+                    <a class="dropdown-item" href="#">Baznas Tanggap Bencana (BTB))</a>
                 </div>
             </li>
             <!-- nav-tags:end -->

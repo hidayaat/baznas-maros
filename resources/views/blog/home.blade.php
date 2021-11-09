@@ -44,6 +44,7 @@
             <div class="row">
                 <div class="col">
                     <h3 class="mb-5">BERITA</h3>
+                    </div>
                     <div class="owl-carousel posts-carousel owl-theme">
                         @foreach ($posts as $post)
                             <div class="item">
@@ -64,6 +65,7 @@
 
                                     {{-- <p>{!! html_entity_decode($post->content) !!}</p> --}}
                                 </div>
+
                                 {{-- <div class="d-flex justify-content-center">
                                 <a href="" class="btn btn-success float-right" style="width: 100%;"role="button">
                                     Baca Selengkapnya
@@ -72,18 +74,18 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
+                
             </div>
         </div>
     </section>
 
     <section>
         <div class="jumbotron text-center" style="
-            background-image: url('{{ asset('vendor/img/bg-cover.png') }}');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;">
+                    background-image: url('{{ asset('vendor/img/bg-cover.png') }}');
+                    background-attachment: fixed;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;">
             <div class="container text-white align-items-center">
                 <h1 class="display-4 font-weight-bold">Mari Bersama Membangun Indonesia</h1>
                 <p class="lead">Terima kasih telah membantu kami, karena kebaikan anda, kmai telah menyalurkan
@@ -91,38 +93,38 @@
                 <div class="row mt-5">
                     <div class="col">
                         <div style="
-                            background-color: rgba(255, 255, 255, 0.3);
-                            width: 100%;
-                            padding: 12px;">
+                                    background-color: rgba(255, 255, 255, 0.3);
+                                    width: 100%;
+                                    padding: 12px;">
                             <h4 class="font-weight-bold">Rp. 3.000.000.000</h4>
                             <p>Dana terhimpun</p>
                         </div>
                     </div>
                     <div class="col">
                         <div style="
-                            background-color: rgba(255, 255, 255, 0.3);
-                            width: 100%;
-                            padding: 12px;
-                            margin-horizontal: 20px;">
+                                    background-color: rgba(255, 255, 255, 0.3);
+                                    width: 100%;
+                                    padding: 12px;
+                                    margin-horizontal: 20px;">
                             <h4 class="font-weight-bold">Rp. 1.000.000.000</h4>
                             <p>Dana tersalurkan</p>
                         </div>
                     </div>
                     <div class="col">
                         <div style="
-                            background-color: rgba(255, 255, 255, 0.3);
-                            width: 100%;
-                            padding: 12px;
-                            margin-horizontal: 20px;">
+                                    background-color: rgba(255, 255, 255, 0.3);
+                                    width: 100%;
+                                    padding: 12px;
+                                    margin-horizontal: 20px;">
                             <h4 class="font-weight-bold">1000 Orang</h4>
                             <p>Muzakki</p>
                         </div>
                     </div>
                     <div class="col">
                         <div style="
-                            background-color: rgba(255, 255, 255, 0.3);
-                            width: 100%;
-                            padding: 12px;">
+                                    background-color: rgba(255, 255, 255, 0.3);
+                                    width: 100%;
+                                    padding: 12px;">
                             <h4 class="font-weight-bold">500 Orang</h4>
                             <p>Mustahiq</p>
                         </div>
@@ -172,6 +174,8 @@
             loop: true,
             margin: 10,
             nav: true,
+            autoplay: true,
+            autoplayTimeout: 4000,
             dots: false,
             responsive: {
                 0: {

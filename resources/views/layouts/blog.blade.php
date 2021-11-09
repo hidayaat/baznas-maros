@@ -27,32 +27,33 @@
 </head>
 
 <body>
+    <div class="d-flex flex-column min-vh-100">
+        <!-- Navigation:start -->
+        @include('layouts._blog.navbar')
+        <!-- Navigation:end -->
 
-    <!-- Navigation:start -->
-    @include('layouts._blog.navbar')
-    <!-- Navigation:end -->
+        <!-- Page Content -->
+        <!-- content:start -->
+        @yield('content')
+        <!-- content:end -->
+        <!-- /.container -->
 
-    <!-- Page Content -->
-    <!-- content:start -->
-    @yield('content')
-    <!-- content:end -->
-    <!-- /.container -->
+        <!-- Footer:start -->
+        @include('layouts._blog.footer')
+        <!-- Footer:end -->
 
-    <!-- Footer:start -->
-    @include('layouts._blog.footer')
-    <!-- Footer:end -->
+        <!-- jquery -->
+        <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
+        <!-- bootstrap -->
+        <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        {{-- owl carousel js --}}
+        <script src="{{ asset('vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
 
-    <!-- jquery -->
-    <script src="{{ asset('vendor/jquery/jquery-3.6.0.min.js') }}"></script>
-    <!-- bootstrap -->
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    {{-- owl carousel js --}}
-    <script src="{{ asset('vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+        @yield('scripts')
 
-    @yield('scripts')
+        @include('sweetalert::alert')
 
-    @include('sweetalert::alert')
-
+    </div>
 </body>
 
 </html>

@@ -17,7 +17,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#" style="color: #005331">Beranda</a></li>
-                                <li class="breadcrumb-item"><a href="#" style="color: #005331">Post</a></li>
+                                <li class="breadcrumb-item active">Berita</li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
                             </ol>
                         </nav>
@@ -101,30 +101,31 @@
                                     <h5 style="font-weight: bold">
                                         Berita Terbaru
                                     </h5>
-                                    
+                                    @foreach ($posts as $post)
                                         <div class="row">
-                                            <div class="col">
-                                                <!-- thumbnail:start -->
-                                                @if (file_exists(public_path($post->thumbnail)))
-                                                    <a href="">
-                                                        <img src="{{ asset($post->thumbnail) }}" class="card-img mb-3"
+                                                <div class="col">
+                                                    <!-- thumbnail:start -->
+                                                    @if (file_exists(public_path($post->thumbnail)))
+                                                        <a href="">
+                                                            <img src="{{ asset($post->thumbnail) }}"
+                                                                class="card-img mb-3" alt="{{ $post->title }}">
+                                                        </a>
+                                                    @else
+                                                        <img class="img-fluid rounded" src="http://placehold.it/750x300"
                                                             alt="{{ $post->title }}">
+                                                    @endif
+                                                </div>
+                                                <div class="col mb-5">
+                                                    <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}">
+                                                        <p style="color: #005331">{{ $post->title }}</p>
                                                     </a>
-                                                @else
-                                                    <img class="img-fluid rounded" src="http://placehold.it/750x300"
-                                                        alt="{{ $post->title }}">
-                                                @endif
-                                            </div>
-                                            <div class="col">
-                                                <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}">
-                                                    <h5 style="color: #005331">{{ $post->title }}</h5>
-                                                </a>
-                                                <small> <i class="far fa-calendar-alt"></i>
-                                                    {{ $post->created_at }}</small>
-                                                <!-- thumbnail:end -->
-                                            </div>
+                                                    <small> <i class="far fa-calendar-alt"></i>
+                                                        {{ $post->created_at }}</small>
+                                                    <!-- thumbnail:end -->
+                                                </div>
+
                                         </div>
-                                    
+                                    @endforeach
                                 </div>
 
                             </div>
