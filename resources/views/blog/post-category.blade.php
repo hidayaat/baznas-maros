@@ -43,7 +43,8 @@
                                 <div class="col-lg-6">
                                     <h2 class="card-title">{{ $post->title }}</h2>
                                     <p class="card-text">{{ $post->description }}</p>
-                                    <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}" class="btn btn-warning">
+                                    <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}"
+                                        class="btn btn-warning">
                                         Baca Selengkapnya
                                     </a>
                                 </div>
@@ -53,7 +54,7 @@
                 @empty
                     <!-- empty -->
                     <h3 class="text-center">
-                        Data belum ada
+                        Data artikel belum ada
                     </h3>
                 @endforelse
                 @if ($posts->hasPages())
@@ -69,16 +70,26 @@
                 <!-- Categories list:start -->
                 <div class="card mb-1">
                     <h5 class="card-header">
-                        Categories
+                        Program
                     </h5>
                     <div class="card-body">
                         <ul class="list-unstyled">
                             <li>
-                                <a href="">
-                                    Category title
-                                </a>
-                                <!-- category descendants:start -->
+                                @if ($category->slug == $categoryRoot->slug)
+                                    {{ $categoryRoot->title }}
+                                @else
+                                    <a href="{{ route('blog.posts.category', ['slug' => $categoryRoot->slug]) }}">
+                                        {{ $categoryRoot->title }}
+                                    </a>
+                                @endif
 
+                                <!-- category descendants:start -->
+                                @if ($categoryRoot->descendants)
+                                    @include('blog.sub-categories', [
+                                    'categoryRoot' => $categoryRoot->descendants,
+                                    'category'=> $category
+                                    ])
+                                @endif
                                 <!-- category descendants:end -->
                             </li>
                         </ul>

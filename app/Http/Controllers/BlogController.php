@@ -43,17 +43,18 @@ class BlogController extends Controller
         })->paginate($this->perPage);
 
         $category = Category::where('slug', $slug)->first();
-
+        $categoryRoot = $category->root();
         return view('blog.post-category',[
             'posts' => $post,
-            'category' => $category
+            'category' => $category,
+            'categoryRoot' => $categoryRoot
         ]);
     }
 
     public function showCategories()
     {
         return view('blog.category', [
-            'categories' => Category::onlyParent()->paginate($this->perPage)
+            'categories' => Category::onlyParent()->paginate(9)
         ]);
     }
 
