@@ -16,7 +16,7 @@
                         <!-- Breadcrumb:Start -->
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#" style="color: #005331">Beranda</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('blog.home') }}" style="color: #005331">Beranda</a></li>
                                 <li class="breadcrumb-item active">Berita</li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ $post->title }}</li>
                             </ol>
@@ -106,7 +106,7 @@
                                                 <div class="col">
                                                     <!-- thumbnail:start -->
                                                     @if (file_exists(public_path($post->thumbnail)))
-                                                        <a href="">
+                                                        <a href="{{ route('blog.post.detail', ['slug' => $post->slug]) }}">
                                                             <img src="{{ asset($post->thumbnail) }}"
                                                                 class="card-img mb-3" alt="{{ $post->title }}">
                                                         </a>
