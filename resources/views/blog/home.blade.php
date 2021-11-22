@@ -96,7 +96,7 @@
                                     background-color: rgba(255, 255, 255, 0.3);
                                     width: 100%;
                                     padding: 12px;">
-                            <h4 class="font-weight-bold">Rp. 3.000.000.000</h4>
+                            <h4 class="font-weight-bold">Rp. 3.398.636.986</h4>
                             <p>Dana terhimpun</p>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                                     width: 100%;
                                     padding: 12px;
                                     margin-horizontal: 20px;">
-                            <h4 class="font-weight-bold">Rp. 1.000.000.000</h4>
+                            <h4 class="font-weight-bold">Rp. 1.803.544.813</h4>
                             <p>Dana tersalurkan</p>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                                     width: 100%;
                                     padding: 12px;
                                     margin-horizontal: 20px;">
-                            <h4 class="font-weight-bold">1000 Orang</h4>
+                            <h4 class="font-weight-bold">312 Orang</h4>
                             <p>Muzakki</p>
                         </div>
                     </div>
@@ -125,13 +125,13 @@
                                     background-color: rgba(255, 255, 255, 0.3);
                                     width: 100%;
                                     padding: 12px;">
-                            <h4 class="font-weight-bold">500 Orang</h4>
-                            <p>Mustahiq</p>
+                            <h4 class="font-weight-bold">3.133 Orang</h4>
+                            <p>Mustahik</p>
                         </div>
                     </div>
                 </div>
                 <p class="lead mt-5">
-                    <a class="btn btn-warning btn-lg" href="#" role="button">Bayar Zakat</a>
+                    <a class="btn btn-warning btn-lg" href="{{ route('blog.create') }}" role="button">Bayar Zakat</a>
                 </p>
             </div>
         </div>
@@ -145,17 +145,17 @@
                     <div class="owl-carousel owl-theme video-slider-1">
 
                         <iframe onplay="pauseSlider();" onpause="playSlider();" onended="playSlider();" controls=""
-                            width="672" height="378" src="https://www.youtube.com/embed/GYRkuhJNeow" frameborder="0"
+                            width="672" height="378" src="https://www.youtube.com/embed/xt5uW1zstN8" frameborder="0"
                             allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
 
                         <iframe onplay="pauseSlider();" onpause="playSlider();" onended="playSlider();" controls=""
-                            width="672" height="378" src="https://www.youtube.com/embed/5a4NydUWKrU" frameborder="0"
+                            width="672" height="378" src="https://www.youtube.com/embed/HUNHgeeNNds" frameborder="0"
                             allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
 
                         <iframe onplay="pauseSlider();" onpause="playSlider();" onended="playSlider();" controls=""
-                            width="672" height="378" src="https://www.youtube.com/embed/0Y6sUTcozfI" frameborder="0"
+                            width="672" height="378" src="https://www.youtube.com/embed/WDXAUMFvGmo" frameborder="0"
                             allow="autoplay; encrypted-media" allowfullscreen>
                         </iframe>
                     </div>

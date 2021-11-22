@@ -62,9 +62,9 @@
                         Turikale Kabupaten Maros<br>
                         Sulawesi Selatan – Indonesia<br>
                         <i class="fas fa-envelope me-3"></i>
-                        info@example.com<br>
-                        <i class="fas fa-phone me-3"></i> + 01 234 567 88<br>
-                        <i class="fas fa-mail-bulk"></i> + 01 234 567 89<br>
+                        baznaskab.maros@baznas.go.id<br>
+                        <i class="fas fa-phone me-3"></i> (0411) 893 87 60<br>
+                        <i class="fab fa-whatsapp"></i> +62 853 9969 0166<br>
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -77,19 +77,19 @@
                         </p>
                     </strong>
                     <p>
-                        <a href="" class="me-4 text-reset">
+                        <a href="https://www.facebook.com/BAZNASKABUPATENMAROS" class="me-4 text-reset">
                             <i class="fab fa-facebook-f"></i> BAZNAS Kabupaten Maros
                         </a>
-                        <br>
+                        {{-- <br>
                         <a href="" class="me-4 text-reset">
                             <i class="fab fa-twitter"></i> @baznas_maros
+                        </a> --}}
+                        <br>
+                        <a href="https://www.instagram.com/baznas_maros/" class="me-4 text-reset">
+                            <i class="fab fa-instagram"></i> @baznas_maros
                         </a>
                         <br>
-                        <a href="" class="me-4 text-reset">
-                            <i class="fab fa-instagram"></i> @baznasmaros
-                        </a>
-                        <br>
-                        <a href="" class="me-4 text-reset">
+                        <a href="https://www.youtube.com/channel/UCkfQDAYFk2M9yXNwt2mCpzQ" class="me-4 text-reset">
                             <i class="fab fa-youtube"></i> Baznas Maros
                         </a>
                     </p>

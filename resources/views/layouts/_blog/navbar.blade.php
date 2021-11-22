@@ -23,7 +23,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" href="{{ route('blog.profil') }}">Profil</a>
-                    <a class="dropdown-item" href="#">Struktur Organisasi</a>
+                    {{-- <a class="dropdown-item" href="#">Struktur Organisasi</a> --}}
                 </div>
             </li>
             <!-- nav-categories:tags -->

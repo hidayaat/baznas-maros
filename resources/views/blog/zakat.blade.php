@@ -186,7 +186,7 @@
                 </table>
             </div>
             <div class="col-md-4">
-                <img class="img-fluid" src="{{ asset('vendor/img/qris.jpeg') }}" alt="">
+                {{-- <img class="img-fluid" src="{{ asset('vendor/img/qris.jpeg') }}" alt=""> --}}
             </div>
         </div>
     </div>
